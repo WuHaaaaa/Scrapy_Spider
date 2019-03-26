@@ -13,7 +13,8 @@ class TutorialItem(scrapy.Item):
     # name = scrapy.Field()
     pass
 
-class RecruitItem(scrapy.item):
+
+class RecruitItem(scrapy.Item):
     """
     定义腾讯招聘爬取字段
     """
@@ -23,4 +24,14 @@ class RecruitItem(scrapy.item):
     recruitNumber = scrapy.Field()
     workLocation = scrapy.Field()
     publishTime = scrapy.Field()
+
+
+class QuoteItem(scrapy.Item):
+    """
+    定义爬取网站字段
+    """
+    text = scrapy.Field()
+    author = scrapy.Field()
+    tags = scrapy.Field()
+    
 
