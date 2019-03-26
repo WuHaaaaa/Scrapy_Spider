@@ -1,4 +1,5 @@
 import scrapy
+from tutorial.items import RecruitItem
 
 class RecruitSpider(scrapy.Spider):
     """
@@ -29,3 +30,12 @@ class RecruitSpider(scrapy.Spider):
             with open('tencetn.csv','a+') as f:
                 f.write(name +","+ detailLink +","+ catalog +","+ str(recruitNumber) +","+ workLocation+","+ str(publishTime) + '\n')
             print(name," ",detailLink," ", catalog," ", recruitNumber, " ", workLocation, " ", publishTime)
+            item = RecruitItem()
+            item['name'] = name
+            item['detailLink'] = detailLink
+            item['catalog'] = catalog
+            item['recruitNumber'] = recruitNumber
+            item['workLocation'] = workLocation
+            item['publishTime'] = publishTime
+
+            yield item
