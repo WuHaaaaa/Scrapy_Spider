@@ -19,17 +19,13 @@ class RecruitSpider(scrapy.Spider):
         """
         解析返回的网页数据，提取结构化数据，生成下一页需要请求的URL
         """
-
         for sel in response.xpath('//*[@class="even"]'):
-            name = sel.xpath("./td[1]/a/text()").extract()[0]
-            detailLink = sel.xpath("./td[1]/a/@href").extract()[0]
-            catalog = sel.xpath("./td[2]/text()").extract()[0]
-            recruitNumber = sel.xpath('./td[3]/text()').extract()[0]
-            workLocation = sel.xpath('./td[4]/text()').extract()[0]
-            publishTime = sel.xpath('./td[5]/text()').extract()[0]
-            with open('tencetn.csv','a+') as f:
-                f.write(name +","+ detailLink +","+ catalog +","+ str(recruitNumber) +","+ workLocation+","+ str(publishTime) + '\n')
-            print(name," ",detailLink," ", catalog," ", recruitNumber, " ", workLocation, " ", publishTime)
+            name = sel.xpath("./td[1]/a/text()").extract_first()
+            detailLink = sel.xpath("./td[1]/a/@href").extract_first()
+            catalog = sel.xpath("./td[2]/text()").extract_first()
+            recruitNumber = sel.xpath('./td[3]/text()').extract_first()
+            workLocation = sel.xpath('./td[4]/text()').extract_first()
+            publishTime = sel.xpath('./td[5]/text()').extract_first()
             item = RecruitItem()
             item['name'] = name
             item['detailLink'] = detailLink
@@ -39,3 +35,7 @@ class RecruitSpider(scrapy.Spider):
             item['publishTime'] = publishTime
 
             yield item
+
+        next = response.css('.pagenav #next::attr(href)').extract_first()
+        url = "https://hr.tencent.com/" + next
+        yield scrapy.Request(url,self.parse)
