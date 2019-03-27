@@ -9,6 +9,9 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
+import urllib.parse
+
+
 BOT_NAME = 'tutorial'
 
 SPIDER_MODULES = ['tutorial.spiders']
@@ -71,6 +74,16 @@ ROBOTSTXT_OBEY = False
 #ITEM_PIPELINES = {
 #    'tutorial.pipelines.TutorialPipeline': 300,
 #}
+ITEM_PIPELINES = {
+    # 键名对应piplines.py中的类名称，值表示调用优先级，越小则越排在前
+    'tutorial.pipelines.TutorialPipeline': 300,
+    'tutorial.pipelines.MongoPipeline': 400,
+}
+username = urllib.parse.quote_plus("admin")
+password = urllib.parse.quote_plus("admin123")
+MONGO_URI = "mongodb://%s:%s@127.0.0.1:27017" %(username,password)
+print("MONGO_URI=-======================" + MONGO_URI)
+MONGO_DB = "tutorial"
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
