@@ -8,7 +8,6 @@
 #     https://doc.scrapy.org/en/latest/topics/settings.html
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
-
 import urllib.parse
 
 
@@ -81,7 +80,7 @@ ITEM_PIPELINES = {
 }
 username = urllib.parse.quote_plus("admin")
 password = urllib.parse.quote_plus("admin123")
-MONGO_URI = "mongodb://%s:%s@127.0.0.1:27017" %(username,password)
+MONGO_URI = "mongodb://%s:%s@127.0.0.1:27017" % (username, password)
 print("MONGO_URI=-======================" + MONGO_URI)
 MONGO_DB = "tutorial"
 

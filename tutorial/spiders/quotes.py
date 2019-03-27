@@ -2,6 +2,7 @@
 import scrapy
 from tutorial.items import QuoteItem
 
+
 class QuotesSpider(scrapy.Spider):
     # 每个项目的唯一名称
     name = 'quotes'
@@ -22,7 +23,7 @@ class QuotesSpider(scrapy.Spider):
             item['author'] = author
             item['tags'] = tags
             yield item
-        
+
         next = response.css('.pager .next a::attr(href)').extract_first()
         url = response.urljoin(next)
-        yield scrapy.Request(url,self.parse)
+        yield scrapy.Request(url, self.parse)
