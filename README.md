@@ -10,7 +10,7 @@ scrapy crawl tencent -o tencent.csv
 scrapy crawl quotes -o quotes.jl
 ```
 
-+ 爬取腾讯，并入库
++ 爬取腾讯招聘，并入库
 ```
 scrapy crawl tencent
 ```
