@@ -19,3 +19,13 @@ scrapy crawl tencent
 ```
 scrapy crawl quotes
 ```
+
++ 设置随机User-Agent
+```
+scrapy crawl httpbin
+```
+
++ 爬取360图片摄影页面
+```
+scrapy crawl images
+```
